@@ -12,7 +12,7 @@ Many people use the following simple line of code, but there are some disadvanta
 
     var env = process.env.NODE_ENV || 'development';
 
-1. If your code tests against, `development` and `production` (for example), then you must only use those values for NODE_ENV. `get-env` library accepts multiple alternative values as rules for an environment, therefore you can make unlimited number aliases to the same environment same. This lets you forget about the exact string value you used in your code, which means you can use whatever value that comes naturally to your mind whenever you switch environments. All environment names matched by this library are case-insensitive as well.
+1. If your code tests against, `development` and `production` (for example), then you must only use those values for `NODE_ENV`. `get-env` library accepts multiple alternative values as rules for an environment, therefore you can make unlimited number aliases to the same environment same. This lets you forget about the exact string value you used in your code, which means you can use whatever value that comes naturally to your mind whenever you switch environments. All environment names matched by this library are case-insensitive as well.
 
 2. If you supply an unexpected value for `NODE_ENV` (for example, `productoin` instead of `production` -- that is a typo), the `env` variable is now set to this wrong value and the rest of code that tests against this variable would have an unexpected behavior. This library fixes this problem by matching the exact string values with `dev` acting as a catch-all, default environment.
 
