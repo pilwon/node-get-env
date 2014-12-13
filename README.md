@@ -5,6 +5,27 @@
 
 `get-env` is a tiny [Node.js](http://nodejs.org/) library returning either `dev` or `prod` based on `process.env.NODE_ENV`. Extra environments can be optionally added.
 
+The following lengthy code...
+
+```js
+var env;
+if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'prod') {
+  env = 'prod';
+} else if (process.env.NODE_ENV === 'docker') {
+  env = 'docker';
+} else if (process.env.NODE_ENV === 'staging') {
+  env = 'staging';
+} else {
+  env = 'dev';
+}
+```
+
+... can be simplified to ...
+
+```js
+var env = require('get-env')('staging');
+```
+
 
 ## Matching rules for `process.env.NODE_ENV`
 
