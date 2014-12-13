@@ -11,10 +11,10 @@ The following lengthy code...
 var env;
 if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'prod') {
   env = 'prod';
-} else if (process.env.NODE_ENV === 'docker') {
-  env = 'docker';
 } else if (process.env.NODE_ENV === 'staging') {
   env = 'staging';
+} else if (process.env.NODE_ENV === 'test' || process.env.NODE_ENV === 'testing') {
+  env = 'test';
 } else {
   env = 'dev';
 }
@@ -23,7 +23,10 @@ if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'prod') {
 ... can be simplified to ...
 
 ```js
-var env = require('get-env')('staging');
+var env = require('get-env')({
+  staging: 'staging',
+  test: ['test', 'testing']
+});
 ```
 
 
