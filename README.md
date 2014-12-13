@@ -6,7 +6,7 @@
 `get-env` is a tiny [Node.js](http://nodejs.org/) library returning either `dev` or `prod` based on `process.env.NODE_ENV`. Extra environments can be optionally added.
 
 
-## `process.env.NODE_ENV` Match Rules
+## Matching rules for `process.env.NODE_ENV`
 
 * This library understands 2 default environments by default: `dev` and `prod`.
 * `prod` is returned when any of the following values are set: `PROD`, `PRODUCTION`
