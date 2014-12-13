@@ -5,6 +5,9 @@
 
 `get-env` is a tiny [Node.js](http://nodejs.org/) library returning either `dev` or `prod` based on `process.env.NODE_ENV`. Extra environments can be optionally added.
 
+
+## Why use this library?
+
 The following lengthy code...
 
 ```js
@@ -29,7 +32,7 @@ var env = require('get-env')({
 });
 ```
 
-## Why not just use `var env = process.env.NODE_ENV || 'development';`?
+### Why not just use `var env = process.env.NODE_ENV || 'development';`?
 
 It works perfectly for simple cases, but there are few disadvantages to this approach.
 
