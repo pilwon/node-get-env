@@ -1,0 +1,27 @@
+{
+  "name": "get-env",
+  "version": "0.1.0",
+  "description": "Returns either `dev` or `prod` based on `process.env.NODE_ENV`.",
+  "license": "MIT",
+  "author": {
+    "name": "Pilwon Huh",
+    "email": "pilwon@gmail.com"
+  },
+  "homepage": "https://github.com/pilwon/node-get-env",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/pilwon/node-get-env.git"
+  },
+  "keywords": [
+    "env",
+    "environment",
+    "envvar",
+    "nodeenv",
+    "node_env",
+    "dev",
+    "prod"
+  ],
+  "scripts": {
+    "prepublish": "npm prune"
+  }
+}
