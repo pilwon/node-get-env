@@ -1,4 +1,4 @@
-module.exports = function () {
+function _env() {
   switch (process.env.NODE_ENV) {
     case 'production':
     case 'prod':
@@ -8,4 +8,6 @@ module.exports = function () {
     default:
       return 'dev';
   }
-};
+}
+
+module.exports = _env();
