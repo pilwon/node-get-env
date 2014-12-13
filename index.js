@@ -76,7 +76,7 @@ function _buildExtras(args) {
   throw new Error('Arguments must be non-empty string, array, or a plain object.');
 }
 
-module.exports = function () {
+function getEnv() {
   var args = Array.prototype.slice.call(arguments);
   var extras = _buildExtras(args);
   var nodeEnv = (process.env.NODE_ENV || '').toUpperCase();
@@ -95,3 +95,5 @@ module.exports = function () {
 
   return 'dev';
 }
+
+module.exports = getEnv;
