@@ -29,6 +29,18 @@ var env = require('get-env')({
 });
 ```
 
+## Why not just use `var env = process.env.NODE_ENV || 'development';`?
+
+It works perfectly for simple cases, but there are few disadvantages to this approach.
+
+1. If your code tests against, `development` and `production` (for example), then you must only use those values for NODE_ENV. `get-env` library accepts multiple alternative values as rules for an environment, therefore you can make unlimited number aliases to the same environment same. This lets you forget about the exact string value you used in your code, which means you can use whatever value that comes naturally to your mind whenever you switch environments. All environment names matched by this library are case-insensitive as well.
+
+2. If you supply an unexpected value for `NODE_ENV` (for example, `productoin` instead of `production` -- that is a typo), the `env` variable is now set to this wrong value and the rest of code that tests against this variable would have an unexpected behavior. This library fixes this problem by matching the exact string values with `dev` acting as a catch-all, default environment.
+
+3. If you start adding more extra environments (ex: staging, test, etc.) then it won't be a simple one line of code anymore. This library provides consistent, straightforward, and flexible extra environment addition methods therefore you can freely add or remove environments with minimal overhead in your code while keeping all the above mentioned benefits.
+
+Basically, this library provides a consistent, reliable, scalable way to parse the `NODE_ENV` environment variable so it is ready for you to use from an app targetting multiple environments.
+
 
 ## Matching rules for `process.env.NODE_ENV`
 
