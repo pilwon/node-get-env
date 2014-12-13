@@ -28,8 +28,6 @@ var env = require('get-env')();
 
 This returns either `dev` or `prod`. (default environments)
 
-### Extra environments
-
 Extra environments can be optionally added in addition to the default environments (`dev` and `prod`) with any of the following methods:
 
 1. Pass a string
