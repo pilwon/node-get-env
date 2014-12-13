@@ -5,6 +5,8 @@
 
 `get-env` is a [Node.js](http://nodejs.org/) library returning `dev`, `prod`, or optional extra environments based on `process.env.NODE_ENV`.
 
+* [get-config](https://github.com/pilwon/node-get-config) uses this library to parse `process.env.NODE_ENV`.
+
 
 ## Why use this library?
 
