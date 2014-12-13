@@ -20,6 +20,9 @@ Many people use the following simple line of code, but there are some disadvanta
 
 Basically, this library provides a consistent, reliable, scalable way to parse the `NODE_ENV` environment variable so it is ready for you to use from an app targetting multiple environments.
 
+
+## Examples
+
 The following single line of code ...
 
 ```js
