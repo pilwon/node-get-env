@@ -22,11 +22,11 @@
 
 ## Usage
 
-### Default environments (returns either `dev` or `prod`)
-
 ```js
 var env = require('get-env')();
 ```
+
+This returns either `dev` or `prod`. (default environments)
 
 ### Extra environments
 
