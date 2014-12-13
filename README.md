@@ -30,7 +30,7 @@ This returns either `dev` or `prod`. (default environments)
 
 Extra environments can be optionally added in addition to the default environments (`dev` and `prod`) with any of the following methods:
 
-1. Pass a string
+### 1. Pass a string
 
 ```js
 var env = require('get-env')('test');
@@ -39,7 +39,7 @@ var env = require('get-env')('test');
 * Return `test` when the value is `TEST`.
 * Otherwise, return `dev` or `prod`. (default rules apply)
 
-2. Pass multiple strings as arguments or an array
+### 2. Pass multiple strings as arguments or an array
 
 ```js
 var env = require('get-env')('docker', 'test');
@@ -51,7 +51,7 @@ var env = require('get-env')(['docker', 'test']);
 * Return `test` when the value is `TEST`.
 * Otherwise, return `dev` or `prod`. (default rules apply)
 
-3. Pass a plain object
+### 3. Pass a plain object
 
 ```js
 var env = require('get-env')({
