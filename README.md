@@ -3,7 +3,7 @@
 
 # get-env
 
-`get-env` is a tiny [Node.js](http://nodejs.org/) library returning `dev`, `prod`, or optional extra environments based on `process.env.NODE_ENV`.
+`get-env` is a [Node.js](http://nodejs.org/) library returning `dev`, `prod`, or optional extra environments based on `process.env.NODE_ENV`.
 
 
 ## Why use this library?
@@ -29,9 +29,9 @@ var env = require('get-env')();
 ... is equivalent to ...
 
 ```js
-var nodeEnv = process.env.NODE_ENV || 'development';
+var nodeEnv = (process.env.NODE_ENV || 'development').toLowerCase();
 var env;
-if (nodeEnv === 'prod' || nodeEnv === 'production' || nodeEnv === 'PROD' || nodeEnv === 'PRODUCTION') {
+if (nodeEnv === 'prod' || nodeEnv === 'production') {
   env = 'prod';
 } else {
   env = 'dev';
