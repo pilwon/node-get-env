@@ -8,7 +8,7 @@
 
 ## Matching rules for `process.env.NODE_ENV`
 
-* This library understands 2 default environments by default: `dev` and `prod`.
+* There are 2 default environments: `dev` and `prod`.
 * `prod` is returned when any of the following values are set: `PROD`, `PRODUCTION`
 * `dev` is returned when the value is empty or it has an unexpected value. (default environment)
 * It always expects a case-insensitive value. (i.e. `NODE_ENV=prod` is equivalent to `NODE_ENV=PROD`)
