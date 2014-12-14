@@ -1,8 +1,8 @@
-var getEnv = require('./');
+var getEnv = require('../');
 
 var env;
 
-// env = getEnv();
+env = getEnv();
 // env = getEnv('test');
 // env = getEnv('docker', 'test');
 // env = getEnv('test', 'test');
