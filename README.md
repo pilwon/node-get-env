@@ -78,7 +78,7 @@ var env = require('get-env')({
 * There are 2 pre-registered environments: `dev` and `prod`.
 * `prod` is returned when any of the following values are set: `prod`, `production`
 * `dev` is returned when the value is empty (default environment) or any of the following values are set: `dev`, `development`
-* It throws an **error** when the value is unregistered and non-empty. (catches typos)
+* It throws an error when the value is unregistered and non-empty. (catches typos)
 * It always expects a case-insensitive value. (i.e. `NODE_ENV=PROD` is equivalent to `NODE_ENV=prod`)
 * Extra environments can be optionally added in various methods. (see the usage section below)
 
