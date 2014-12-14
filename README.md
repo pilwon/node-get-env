@@ -16,7 +16,7 @@ Many people use the following simple line of code, but there are some disadvanta
 
 1. If your code tests against, `development` and `production` (for example), then you must only use those values for `NODE_ENV`. `get-env` library accepts multiple alternative values as rules for an environment, therefore you can make unlimited number aliases to the same environment same. This lets you forget about the exact string value you used in your code, which means you can use whatever value that comes naturally to your mind whenever you switch environments. All environment names matched by this library are case-insensitive as well.
 
-2. If you supply an unexpected value for `NODE_ENV` (for example, `productoin` instead of `production` -- that is a typo), the `env` variable is now set to this wrong value and the rest of code that tests against this variable would have an unexpected behavior. This library fixes this problem by matching the exact string values with `dev` acting as a catch-all, default environment.
+2. If you supply an unregistered value for `NODE_ENV` (for example, `productoin` instead of `production` -- that is a typo), the `env` variable is now set to this wrong value and the rest of code that tests against this variable would have an unexpected behavior. This library fixes this problem by throwing an error on unregistered and non-empty value set to `NODE_ENV`. An empty value is resolved to `dev` environment.
 
 3. If you start adding more extra environments (ex: staging, test, etc.) then it won't be a simple one line of code anymore. This library provides consistent, straightforward, and flexible extra environment addition methods therefore you can freely add or remove environments with minimal overhead in your code while keeping all the above mentioned benefits.
 
@@ -34,12 +34,14 @@ var env = require('get-env')();
 ... is equivalent to ...
 
 ```js
-var nodeEnv = (process.env.NODE_ENV || 'development').toLowerCase();
+var nodeEnv = (process.env.NODE_ENV || '').toLowerCase();
 var env;
 if (nodeEnv === 'prod' || nodeEnv === 'production') {
   env = 'prod';
-} else {
+} else if (nodeEnv === 'dev' || nodeEnv === 'development' || nodeEnv === '') {
   env = 'dev';
+} else {
+  throw new Error('Unknown environment name: NODE_ENV=' + nodeEnv);
 }
 ```
 
@@ -53,8 +55,10 @@ if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'prod') {
   env = 'staging';
 } else if (process.env.NODE_ENV === 'test' || process.env.NODE_ENV === 'testing') {
   env = 'test';
-} else {
+} else if (process.env.NODE_ENV === 'dev' || process.env.NODE_ENV === 'development' || !process.env.NODE_ENV) {
   env = 'dev';
+} else {
+  throw new Error('Unknown environment name: NODE_ENV=' + nodeEnv);
 }
 ```
 
@@ -70,10 +74,11 @@ var env = require('get-env')({
 
 ## Matching rules for `process.env.NODE_ENV`
 
-* There are 2 default environments: `dev` and `prod`.
-* `prod` is returned when any of the following values are set: `PROD`, `PRODUCTION`
-* `dev` is returned when the value is empty or it has an unexpected value. (default environment)
-* It always expects a case-insensitive value. (i.e. `NODE_ENV=prod` is equivalent to `NODE_ENV=PROD`)
+* There are 2 pre-registered environments: `dev` and `prod`.
+* `prod` is returned when any of the following values are set: `prod`, `production`
+* `dev` is returned when the value is empty (default environment) or any of the following values are set: `dev`, `development`
+* It throws an **error** when the value is unregistered and non-empty. (catches typos)
+* It always expects a case-insensitive value. (i.e. `NODE_ENV=PROD` is equivalent to `NODE_ENV=prod`)
 * Extra environments can be optionally added in various methods. (see the usage section below)
 
 
@@ -88,9 +93,9 @@ var env = require('get-env')({
 var env = require('get-env')();
 ```
 
-This returns either `dev` or `prod`. (default environments)
+This returns either `dev` or `prod`. (pre-registered environments)
 
-Extra environments can be optionally added in addition to the default environments (`dev` and `prod`) with any of the following methods:
+Extra environments can be optionally added in addition to the pre-registered environments (`dev` and `prod`) with any of the following methods:
 
 ### 1. Pass a string
 
@@ -117,15 +122,15 @@ var env = require('get-env')(['docker', 'test']);
 
 ```js
 var env = require('get-env')({
-  docker: 'DOCKER',  // or 'docker'
-  test: ['TEST', 'TESTING'],  // or ['test', 'testing']
-  prod: ['PR', 'PROD', 'PRODUCTION']  // or ['pr', 'prod', 'production']
+  docker: 'docker',  // or 'DOCKER'
+  test: ['test', 'testing'],  // or ['TEST', 'TESTING']
+  prod: ['pr', 'prod', 'production']  // or ['PR', 'PROD', 'PRODUCTION']
 });
 ```
 
-* Return `docker` when the value is `DOCKER`.
-* Return `test` when the value is `TEST` or `TESTING`.
-* Return `prod` when the value is `PR`, `PROD`, or `PRODUCTION`. (default `prod` rules are overriden)
+* Return `docker` when the value is `docker`.
+* Return `test` when the value is `test` or `testing`.
+* Return `prod` when the value is `pr`, `prod`, or `production`. (pre-reigstered rules for `prod` are overriden)
 * Otherwise, return `dev`.
 
 
