@@ -48,14 +48,15 @@ if (nodeEnv === 'prod' || nodeEnv === 'production') {
 For slightly more complex example, the following lengthy code ...
 
 ```js
+var nodeEnv = process.env.NODE_ENV;
 var env;
-if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'prod') {
+if (nodeEnv === 'production' || nodeEnv === 'prod') {
   env = 'prod';
-} else if (process.env.NODE_ENV === 'staging') {
+} else if (nodeEnv === 'staging') {
   env = 'staging';
-} else if (process.env.NODE_ENV === 'test' || process.env.NODE_ENV === 'testing') {
+} else if (nodeEnv === 'test' || nodeEnv === 'testing') {
   env = 'test';
-} else if (process.env.NODE_ENV === 'dev' || process.env.NODE_ENV === 'development' || !process.env.NODE_ENV) {
+} else if (nodeEnv === 'dev' || nodeEnv === 'development' || !nodeEnv) {
   env = 'dev';
 } else {
   throw new Error('Unknown environment name: NODE_ENV=' + nodeEnv);
