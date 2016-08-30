@@ -12,7 +12,7 @@
 
 Many people use the following simple line of code, but there are some disadvantages to this approach:
 
-    var env = process.env.NODE_ENV || 'development';
+    const env = process.env.NODE_ENV || 'development';
 
 1. If your code tests against, `development` and `production` (for example), then you must only use those values for `NODE_ENV`. `get-env` library accepts multiple alternative values as rules for an environment, therefore you can make unlimited number of aliases to the same environment same. This lets you forget about the exact string value you used in your code, which means you can use whatever value that comes naturally to your mind whenever you switch environments. All environment names matched by this library are case-insensitive as well.
 
@@ -28,13 +28,13 @@ Basically, this library provides a consistent, reliable, scalable way to parse t
 The following single line of code ...
 
 ```js
-var env = require('get-env')();
+const env = require('get-env')();
 ```
 
 ... is equivalent to ...
 
 ```js
-var nodeEnv = (process.env.NODE_ENV || '').toLowerCase();
+const nodeEnv = (process.env.NODE_ENV || '').toLowerCase();
 var env;
 if (nodeEnv === 'prod' || nodeEnv === 'production') {
   env = 'prod';
@@ -48,7 +48,7 @@ if (nodeEnv === 'prod' || nodeEnv === 'production') {
 For slightly more complex example, the following lengthy code ...
 
 ```js
-var nodeEnv = process.env.NODE_ENV;
+const nodeEnv = process.env.NODE_ENV;
 var env;
 if (nodeEnv === 'production' || nodeEnv === 'prod') {
   env = 'prod';
@@ -66,7 +66,7 @@ if (nodeEnv === 'production' || nodeEnv === 'prod') {
 ... can be simplified to ...
 
 ```js
-var env = require('get-env')({
+const env = require('get-env')({
   staging: 'staging',
   test: ['test', 'testing']
 });
@@ -91,7 +91,7 @@ var env = require('get-env')({
 ## Usage
 
 ```js
-var env = require('get-env')();
+const env = require('get-env')();
 ```
 
 This returns either `dev` or `prod`. (pre-registered environments)
@@ -101,7 +101,7 @@ Extra environments can be optionally added in addition to the pre-registered env
 ### 1. Pass a string
 
 ```js
-var env = require('get-env')('test');
+const env = require('get-env')('test');
 ```
 
 * Return `test` when the value is `TEST`.
@@ -110,9 +110,9 @@ var env = require('get-env')('test');
 ### 2. Pass multiple strings as arguments or an array
 
 ```js
-var env = require('get-env')('docker', 'test');
+const env = require('get-env')('docker', 'test');
 // OR
-var env = require('get-env')(['docker', 'test']);
+const env = require('get-env')(['docker', 'test']);
 ```
 
 * Return `docker` when the value is `DOCKER`.
@@ -122,7 +122,7 @@ var env = require('get-env')(['docker', 'test']);
 ### 3. Pass a plain object
 
 ```js
-var env = require('get-env')({
+const env = require('get-env')({
   docker: 'docker',  // or 'DOCKER'
   test: ['test', 'testing'],  // or ['TEST', 'TESTING']
   prod: ['pr', 'prod', 'production']  // or ['PR', 'PROD', 'PRODUCTION']
