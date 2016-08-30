@@ -1,63 +1,63 @@
-var assert = require('assert');
+const assert = require('assert');
 
-var _ = require('lodash');
+const isEmpty = require('lodash.isempty');
+const isPlainObject = require('lodash.isplainobject');
+const isString = require('lodash.isstring');
 
-var DEV_RULES = ['dev', 'development'];
-var PROD_RULES = ['prod', 'production'];
+const DEV_RULES = ['dev', 'development'];
+const PROD_RULES = ['prod', 'production'];
 
-function _buildExtras(args) {
-  var extras = [];
-
+function _buildExtras(args = []) {
   if (!args.length) {
-    return extras;
+    return [];
   }
 
   // string
-  if (_.isString(args[0]) && !_.isEmpty(args[0])) {
+  if (isString(args[0]) && !isEmpty(args[0])) {
     assert(
-      _.reduce(args.slice(1), function (count, env) {
-        return count += (_.isString(env) && !_.isEmpty(env)) ? 0 : 1;
+      args.slice(1).reduce((count, env) => {
+        return count += (isString(env) && !isEmpty(env)) ? 0 : 1;
       }, 0) === 0,
       'When the first argument is a non-empty string, then the rest should all be non-empty strings.'
     );
-    args.forEach(function (env) {
-      extras.push({
+    return args.map((env) => {
+      return {
         env: env,
         rules: [env.toLowerCase()]
-      });
+      };
     });
-    return extras;
   }
 
   // array
-  if (_.isArray(args[0])) {
+  if (Array.isArray(args[0])) {
     assert(args.length === 1, 'When the first argument is an array, arguments.length should be 1.')
     assert(
-      _.reduce(args[0], function (count, env) {
-        return count += (_.isString(env) && !_.isEmpty(env)) ? 0 : 1;
+      args[0].reduce((count, env) => {
+        return count += (isString(env) && !isEmpty(env)) ? 0 : 1;
       }, 0) === 0,
       'When the first argument is an array, all its elements should be non-empty strings.'
     );
-    args[0].forEach(function (env) {
-      extras.push({
+    return args[0].map((env) => {
+      return {
         env: env,
         rules: [env.toLowerCase()]
-      });
+      };
     });
-    return extras;
   }
 
   // object
-  if (_.isPlainObject(args[0])) {
+  if (isPlainObject(args[0])) {
     assert(args.length === 1, 'When the first argument is a plain object, arguments.length should be 1.');
-    _.each(args[0], function (rules, env) {
+    const extras = [];
+    for (const env in args[0]) {
+      const rules = args[0][env];
       assert(
-        (_.isString(rules) && !_.isEmpty(rules)) || (_.isArray(rules) && _.reduce(rules, function (count, rule) {
-          return count += (_.isString(rule) && !_.isEmpty(rule)) ? 0 : 1;
+        (isString(rules) && !isEmpty(rules)) || (Array.isArray(rules) && rules.reduce((count, rule) => {
+          return count += (isString(rule) && !isEmpty(rule)) ? 0 : 1;
         }, 0) === 0),
         'Rules of a plain object should be a non-empty string or an array of non-empty strings.'
       );
-      if (_.isString(rules) && !_.isEmpty(rules)) {
+      if (isString(rules) && !isEmpty(rules)) {
         extras.push({
           env: env,
           rules: [rules.toLowerCase()]
@@ -65,40 +65,34 @@ function _buildExtras(args) {
       } else {
         extras.push({
           env: env,
-          rules: rules.map(function (rule) {
-            return rule.toLowerCase()
-          })
+          rules: rules.map(rule => rule.toLowerCase())
         });
       }
-    });
+    }
     return extras;
   }
 
   throw new Error('Arguments must be non-empty string, array, or a plain object.');
 }
 
-function getEnv() {
-  var args = Array.prototype.slice.call(arguments);
-  var extras = _buildExtras(args);
-  var nodeEnv = (process.env.NODE_ENV || '').toLowerCase();
-  var extra;
+module.exports = (...args) => {
+  const extras = _buildExtras(args);
+  const nodeEnv = (process.env.NODE_ENV || '').toLowerCase();
 
-  for (var i = 0; i < extras.length; ++i) {
-    extra = extras[i];
-    if (_.contains(extra.rules, nodeEnv)) {
+  for (let i = 0; i < extras.length; ++i) {
+    const extra = extras[i];
+    if (extra.rules.includes(nodeEnv)) {
       return extra.env;
     }
   }
 
-  if (_.contains(PROD_RULES, nodeEnv)) {
+  if (PROD_RULES.includes(nodeEnv)) {
     return 'prod';
   }
 
-  if (_.contains(DEV_RULES, nodeEnv) || nodeEnv === '') {
+  if (DEV_RULES.includes(nodeEnv) || nodeEnv === '') {
     return 'dev';
   }
 
-  throw new Error('Unknown environment name: NODE_ENV=' + nodeEnv);
+  throw new Error(`Unknown environment name: NODE_ENV=${nodeEnv}`);
 }
-
-module.exports = getEnv;
