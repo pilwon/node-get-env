@@ -1,6 +1,6 @@
 {
   "name": "get-env",
-  "version": "0.4.1",
+  "version": "0.5.0",
   "description": "Return `dev`, `prod`, or optional extra environements based on `process.env.NODE_ENV`",
   "license": "MIT",
   "author": {
