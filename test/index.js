@@ -1,4 +1,4 @@
-var getEnv = require('../');
+var getEnv = require('../dist/');
 
 var env;
 
