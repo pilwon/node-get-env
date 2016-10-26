@@ -1,9 +1,11 @@
 const webpack = require('webpack');
+const webpackNodeExternals = require('webpack-node-externals');
 
 module.exports = {
   entry: {
     index: './src'
   },
+  externals: [webpackNodeExternals()],
   module: {
     loaders: [
       {test: /\.ts$/, loader: 'ts'}
