@@ -5,7 +5,7 @@ module.exports = {
   entry: {
     index: './src'
   },
-  externals: [webpackNodeExternals()],
+  externals: [webpackNodeExternals({modulesFromFile: true})],
   module: {
     loaders: [
       {test: /\.ts$/, loader: 'ts'}
