@@ -1,6 +1,6 @@
 {
   "name": "get-env",
-  "version": "0.5.5",
+  "version": "0.5.6",
   "description": "Return `dev`, `prod`, or optional extra environements based on `process.env.NODE_ENV`",
   "license": "MIT",
   "author": {
@@ -32,9 +32,9 @@
     "@types/lodash": "^4.14.38",
     "@types/node": "^6.0.46",
     "ts-loader": "^1.0.0",
-    "tslint": "^3.15.1",
+    "tslint": "^4.0.0-dev.0",
     "tslint-pilwon": "^0.1.6",
-    "typescript": "^2.0.6",
+    "typescript": "^2.1.0-dev.20161102",
     "webpack": "^2.1.0-beta.25",
     "webpack-node-externals": "^1.5.4"
   }
