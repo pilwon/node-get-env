@@ -26,14 +26,14 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "dependencies": {
-    "lodash": "^4.16.4"
+    "lodash": "^4.16.6"
   },
   "devDependencies": {
-    "@types/lodash": "^4.14.37",
-    "@types/node": "^6.0.45",
-    "ts-loader": "^0.9.5",
+    "@types/lodash": "^4.14.38",
+    "@types/node": "^6.0.46",
+    "ts-loader": "^1.0.0",
     "tslint": "^3.15.1",
-    "tslint-pilwon": "^0.1.4",
+    "tslint-pilwon": "^0.1.6",
     "typescript": "^2.0.6",
     "webpack": "^2.1.0-beta.25",
     "webpack-node-externals": "^1.5.4"

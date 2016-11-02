@@ -1,23 +1,22 @@
-const webpack = require('webpack');
 const webpackNodeExternals = require('webpack-node-externals');
 
 module.exports = {
   entry: {
-    index: './src'
+    index: './src',
   },
-  externals: [webpackNodeExternals({modulesFromFile: true})],
+  externals: [webpackNodeExternals()],
   module: {
     loaders: [
-      {test: /\.ts$/, loader: 'ts'}
-    ]
+      {test: /\.ts$/, loader: 'ts'},
+    ],
   },
   output: {
     libraryTarget: 'commonjs2',
     path: 'dist',
-    filename: '[name].js'
+    filename: '[name].js',
   },
   resolve: {
-    extensions: ['.ts', '.js']
+    extensions: ['.ts', '.js'],
   },
-  target: 'node'
+  target: 'node',
 };
