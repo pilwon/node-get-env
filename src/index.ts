@@ -47,8 +47,7 @@ function _buildExtras(args: any[] = []) {
   if (isPlainObject(args[0])) {
     assert(args.length === 1, 'When the first argument is a plain object, arguments.length should be 1.');
     const extras: any[] = [];
-    for (const env of args[0]) {
-      const rules: any | any[] = args[0][env];
+    for (const [env, rules] of Object.entries(args[0])) {
       assert(
         (isString(rules) && !isEmpty(rules)) || (Array.isArray(rules) && rules.reduce((count, rule) => {
           return count += (isString(rule) && !isEmpty(rule)) ? 0 : 1;
