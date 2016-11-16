@@ -1,6 +1,6 @@
 import * as assert from 'assert';
 
-import { includes, isEmpty, isPlainObject, isString } from 'lodash';
+import { includes, isEmpty, isPlainObject, isString, toPairs } from 'lodash';
 
 const DEV_RULES = ['dev', 'development'];
 const PROD_RULES = ['prod', 'production'];
@@ -47,7 +47,7 @@ function _buildExtras(args: any[] = []) {
   if (isPlainObject(args[0])) {
     assert(args.length === 1, 'When the first argument is a plain object, arguments.length should be 1.');
     const extras: any[] = [];
-    for (const [env, rules] of Object.entries(args[0])) {
+    for (const [env, rules] of toPairs(args[0])) {
       assert(
         (isString(rules) && !isEmpty(rules)) || (Array.isArray(rules) && rules.reduce((count, rule) => {
           return count += (isString(rule) && !isEmpty(rule)) ? 0 : 1;
