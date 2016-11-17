@@ -7,7 +7,7 @@ module.exports = {
   externals: [webpackNodeExternals()],
   module: {
     loaders: [
-      {test: /\.ts$/, loader: 'ts'},
+      {test: /\.ts$/, loader: 'ts-loader'},
     ],
   },
   output: {
