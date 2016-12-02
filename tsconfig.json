@@ -2,8 +2,8 @@
   "compilerOptions": {
     "target": "es5",
     "lib": ["es2017"],
+    "noImplicitAny": true,
     "declaration": true,
-    "declarationDir": ".",
-    "noImplicitAny": true
+    "declarationDir": "."
   }
 }
